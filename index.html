@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUBMIT // THE BUILDER PROTOCOL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SYSTEM HEADER BAR
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="sys-header">
+    <div class="sys-header__left">
+      <span class="sys-header__logo">TBP://SUBMIT</span>
+      <span class="sys-header__sep">│</span>
+      <span class="sys-header__version">v2.1.0</span>
+    </div>
+    <div class="sys-header__center">
+      <span class="sys-header__status" id="sysStatus">SYSTEM READY — AWAITING PAYLOAD</span>
+    </div>
+    <div class="sys-header__right">
+      <span class="sys-header__clock" id="sysClock">00:00:00</span>
+      <span class="sys-header__sep">│</span>
+      <span class="sys-header__session" id="sysSession">SESSION_NULL</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN MATRIX — 3 COLUMN GRID
+       ═══════════════════════════════════════════════════════════ -->
+  <main class="matrix">
+
+    <!-- ─────────────────────────────────────────────────────────
+         LEFT COLUMN — SUBMISSION PROTOCOL TRACKER (25%)
+         ───────────────────────────────────────────────────────── -->
+    <aside class="col col--left">
+      <div class="col__header">
+        <span class="col__header-tag">[PANEL_L]</span>
+        <span class="col__header-title">SUBMISSION PROTOCOL</span>
+      </div>
+      <div class="col__subheader">How It Works — Sequential Workflow</div>
+
+      <div class="protocol-steps">
+
+        <div class="step" data-step="1" id="step1">
+          <div class="step__header">
+            <span class="step__tag">[STEP_01]</span>
+            <span class="step__title">IDENTITY REGISTRATION</span>
+          </div>
+          <div class="step__body">
+            <p>Register your author identity in the right-side manifest. Supply your full legal name, active email, institutional or independent affiliation, and ORCID if available. All metadata fields are required for provenance tracking.</p>
+          </div>
+          <div class="step__rule">RULE: Pseudonyms accepted only with verified email binding.</div>
+        </div>
+
+        <div class="step" data-step="2" id="step2">
+          <div class="step__header">
+            <span class="step__tag">[STEP_02]</span>
+            <span class="step__title">STREAM CLASSIFICATION</span>
+          </div>
+          <div class="step__body">
+            <p>Select the publication stream that matches your manuscript category from the editor pane dropdown. Each stream maps to a distinct editorial pipeline with specialized reviewers.</p>
+          </div>
+          <div class="step__rule">RULE: One stream per submission. Cross-domain papers use INTERDISCIPLINARY.</div>
+        </div>
+
+        <div class="step" data-step="3" id="step3">
+          <div class="step__header">
+            <span class="step__tag">[STEP_03]</span>
+            <span class="step__title">MANUSCRIPT COMPOSITION</span>
+          </div>
+          <div class="step__body">
+            <p>Compose your headline and body content in the center editor workspace. The body field accepts raw markdown. Use standard formatting: headers (##), bold (**), code blocks (```), and inline references.</p>
+          </div>
+          <div class="step__rule">RULE: Minimum 500 characters. No binary or encoded payloads.</div>
+        </div>
+
+        <div class="step" data-step="4" id="step4">
+          <div class="step__header">
+            <span class="step__tag">[STEP_04]</span>
+            <span class="step__title">LICENSING ACKNOWLEDGEMENT</span>
+          </div>
+          <div class="step__body">
+            <p>Review and acknowledge all licensing terms displayed in the right column manifest. Your submission constitutes acceptance of the distribution model, originality provenance requirements, and usage rights as specified.</p>
+          </div>
+          <div class="step__rule">RULE: Submission implies full acceptance. No partial opt-outs.</div>
+        </div>
+
+        <div class="step" data-step="5" id="step5">
+          <div class="step__header">
+            <span class="step__tag">[STEP_05]</span>
+            <span class="step__title">PAYLOAD TRANSMISSION</span>
+          </div>
+          <div class="step__body">
+            <p>Execute the COMMIT action at the bottom of the editor pane to transmit your manuscript payload to the editorial review queue. You will receive a confirmation hash and tracking reference via the registered email.</p>
+          </div>
+          <div class="step__rule">RULE: Submissions are final. Retractions require editorial review.</div>
+        </div>
+
+      </div>
+
+      <div class="col__footer">
+        <span class="col__footer-line">─────────────────────────</span>
+        <div class="col__footer-meta">
+          <span>PROTOCOL_VERSION: 2.1</span>
+          <span>STEPS_TOTAL: 5</span>
+          <span>STATUS: <span id="protocolStatus">PENDING</span></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- COLUMN DIVIDER -->
+    <div class="col-divider"></div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         CENTER COLUMN — EDITOR PANE (50%)
+         ───────────────────────────────────────────────────────── -->
+    <section class="col col--center">
+      <div class="col__header">
+        <span class="col__header-tag">[PANEL_C]</span>
+        <span class="col__header-title">MANUSCRIPT EDITOR</span>
+      </div>
+
+      <!-- AUTHOR IDENTITY BLOCK -->
+      <div class="editor-section">
+        <div class="editor-section__label">[AUTHOR_IDENTITY]</div>
+        <div class="editor-fields-grid">
+          <div class="field-row">
+            <label class="field-label" for="authorName">NAME:</label>
+            <input type="text" id="authorName" class="field-input" placeholder="Full Legal Name or Pen Name" autocomplete="name" />
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="authorEmail">EMAIL:</label>
+            <input type="email" id="authorEmail" class="field-input" placeholder="active@email.domain" autocomplete="email" />
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="authorAffiliation">AFFILIATION:</label>
+            <input type="text" id="authorAffiliation" class="field-input" placeholder="Institution / Organization / Independent" />
+          </div>
+          <div class="field-row field-row--half">
+            <div class="field-row">
+              <label class="field-label" for="authorOrcid">ORCID:</label>
+              <input type="text" id="authorOrcid" class="field-input" placeholder="0000-0000-0000-0000" />
+            </div>
+            <div class="field-row">
+              <label class="field-label" for="authorCountry">REGION:</label>
+              <input type="text" id="authorCountry" class="field-input" placeholder="Country / Region" />
+            </div>
+          </div>
+          <div class="field-row field-row--half">
+            <div class="field-row">
+              <label class="field-label" for="authorWebsite">URL:</label>
+              <input type="url" id="authorWebsite" class="field-input" placeholder="https://your.site" />
+            </div>
+            <div class="field-row">
+              <label class="field-label" for="authorRole">ROLE:</label>
+              <select id="authorRole" class="field-input field-select">
+                <option value="">— Select Role —</option>
+                <option value="researcher">Researcher</option>
+                <option value="engineer">Engineer</option>
+                <option value="designer">Designer</option>
+                <option value="writer">Writer / Journalist</option>
+                <option value="student">Student</option>
+                <option value="independent">Independent Creator</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM CHANNEL SELECTOR -->
+      <div class="editor-section">
+        <div class="editor-section__label">[STREAM_CHANNEL]</div>
+        <div class="stream-row">
+          <label class="field-label" for="streamSelect">PIPELINE:</label>
+          <select id="streamSelect" class="field-input field-select">
+            <option value="">— SELECT PUBLICATION STREAM —</option>
+            <option value="research">RESEARCH :: Original Research Papers</option>
+            <option value="engineering">ENGINEERING :: Technical Implementation</option>
+            <option value="design">DESIGN :: Design Systems & UI/UX</option>
+            <option value="essay">ESSAY :: Long-Form Critical Analysis</option>
+            <option value="tutorial">TUTORIAL :: Instructional & How-To</option>
+            <option value="case-study">CASE_STUDY :: Applied Case Studies</option>
+            <option value="open-source">OPEN_SOURCE :: Open Source Documentation</option>
+            <option value="interdisciplinary">INTERDISCIPLINARY :: Cross-Domain Work</option>
+            <option value="commentary">COMMENTARY :: Opinion & Commentary</option>
+            <option value="data">DATA :: Datasets & Benchmarks</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- MANUSCRIPT METADATA -->
+      <div class="editor-section">
+        <div class="editor-section__label">[MANUSCRIPT_META]</div>
+        <div class="field-row">
+          <label class="field-label" for="manuscriptTags">TAGS:</label>
+          <input type="text" id="manuscriptTags" class="field-input" placeholder="comma-separated keywords (e.g., ai, systems, design)" />
+        </div>
+        <div class="field-row field-row--half">
+          <div class="field-row">
+            <label class="field-label" for="manuscriptLang">LANG:</label>
+            <select id="manuscriptLang" class="field-input field-select">
+              <option value="en">EN — English</option>
+              <option value="es">ES — Español</option>
+              <option value="fr">FR — Français</option>
+              <option value="de">DE — Deutsch</option>
+              <option value="zh">ZH — 中文</option>
+              <option value="ja">JA — 日本語</option>
+              <option value="other">OTHER</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="manuscriptType">FORMAT:</label>
+            <select id="manuscriptType" class="field-input field-select">
+              <option value="markdown">MARKDOWN</option>
+              <option value="plaintext">PLAINTEXT</option>
+              <option value="latex">LATEX</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- HEADLINE FIELD -->
+      <div class="editor-section">
+        <div class="editor-section__label">[HEADLINE]</div>
+        <input type="text" id="headlineField" class="field-input field-input--headline" placeholder="MANUSCRIPT TITLE — Enter headline here" />
+      </div>
+
+      <!-- ABSTRACT FIELD -->
+      <div class="editor-section">
+        <div class="editor-section__label">[ABSTRACT]</div>
+        <textarea id="abstractField" class="field-input field-textarea field-textarea--abstract" placeholder="Brief abstract or summary of your manuscript (150-300 words recommended)..." rows="4"></textarea>
+      </div>
+
+      <!-- BODY WORKSPACE -->
+      <div class="editor-section editor-section--body">
+        <div class="editor-section__label">
+          <span>[BODY // RAW MARKDOWN WORKSPACE]</span>
+          <span class="char-counter" id="charCounter">CHARS: 0 / MIN: 500</span>
+        </div>
+        <div class="editor-toolbar">
+          <button class="toolbar-btn" data-insert="## " title="Heading">H2</button>
+          <button class="toolbar-btn" data-insert="### " title="Sub-heading">H3</button>
+          <button class="toolbar-btn" data-insert="**" data-wrap="true" title="Bold">B</button>
+          <button class="toolbar-btn" data-insert="_" data-wrap="true" title="Italic">I</button>
+          <button class="toolbar-btn" data-insert="`" data-wrap="true" title="Inline Code">`</button>
+          <button class="toolbar-btn" data-insert="```\n\n```" title="Code Block">{ }</button>
+          <button class="toolbar-btn" data-insert="> " title="Blockquote">></button>
+          <button class="toolbar-btn" data-insert="- " title="List">—</button>
+          <button class="toolbar-btn" data-insert="[text](url)" title="Link">[]</button>
+          <button class="toolbar-btn" data-insert="---\n" title="Divider">──</button>
+        </div>
+        <textarea id="bodyField" class="field-input field-textarea field-textarea--body" placeholder="Begin composing your manuscript body here...
+
+Supports standard markdown syntax:
+  ## Section Header
+  **bold text**  _italic text_
+  `inline code`
+  ```language
+  code block
+  ```
+  > blockquote
+  - list item
+  [link text](url)
+
+Minimum 500 characters required for submission." rows="20"></textarea>
+      </div>
+
+      <!-- SUPPLEMENTARY LINKS -->
+      <div class="editor-section">
+        <div class="editor-section__label">[SUPPLEMENTARY_REFS]</div>
+        <div class="field-row">
+          <label class="field-label" for="refRepo">REPO:</label>
+          <input type="url" id="refRepo" class="field-input" placeholder="https://github.com/user/repo" />
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="refDemo">DEMO:</label>
+          <input type="url" id="refDemo" class="field-input" placeholder="https://demo.example.com" />
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="refData">DATA:</label>
+          <input type="url" id="refData" class="field-input" placeholder="https://dataset.source.org/..." />
+        </div>
+      </div>
+
+      <!-- CO-AUTHORS -->
+      <div class="editor-section">
+        <div class="editor-section__label">
+          <span>[CO_AUTHORS]</span>
+          <button class="toolbar-btn" id="addCoAuthor" title="Add Co-Author">+ ADD</button>
+        </div>
+        <div id="coAuthorsList" class="co-authors-list">
+          <div class="co-author-row" data-index="0">
+            <input type="text" class="field-input co-author-name" placeholder="Co-author name" />
+            <input type="email" class="field-input co-author-email" placeholder="email@domain" />
+            <button class="toolbar-btn co-author-remove" title="Remove">×</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACKNOWLEDGEMENTS CHECKBOX BLOCK -->
+      <div class="editor-section">
+        <div class="editor-section__label">[DECLARATIONS]</div>
+        <div class="declaration-checks">
+          <label class="check-row">
+            <input type="checkbox" id="checkOriginal" class="check-input" />
+            <span class="check-label">I confirm this manuscript is original work and has not been previously published.</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="checkRights" class="check-row" />
+            <span class="check-label">I have the rights to all included content, code, images, and datasets.</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="checkLicense" class="check-input" />
+            <span class="check-label">I accept the licensing terms as specified in the Licensing Manifest (Panel_R).</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="checkAccuracy" class="check-input" />
+            <span class="check-label">All author information and metadata provided is accurate and complete.</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="checkEthics" class="check-input" />
+            <span class="check-label">This work complies with ethical research and publication standards.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SUBMIT BUTTON — ACTION COMPILER -->
+      <div class="action-compiler">
+        <div class="action-compiler__status" id="compilerStatus">
+          <span class="action-compiler__status-label">COMPILER STATUS:</span>
+          <span class="action-compiler__status-value" id="compilerStatusValue">AWAITING REQUIRED FIELDS</span>
+        </div>
+        <button class="action-compiler__btn" id="submitBtn" type="button">
+          [ COMMIT MANUSCRIPT PAYLOAD // TRANSMIT ]
+        </button>
+        <div class="action-compiler__hash" id="compilerHash">
+          TX_HASH: PENDING — WILL GENERATE ON COMMIT
+        </div>
+      </div>
+
+    </section>
+
+    <!-- COLUMN DIVIDER -->
+    <div class="col-divider"></div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         RIGHT COLUMN — LICENSING MANIFEST (25%)
+         ───────────────────────────────────────────────────────── -->
+    <aside class="col col--right">
+      <div class="col__header">
+        <span class="col__header-tag">[PANEL_R]</span>
+        <span class="col__header-title">LICENSING MANIFEST</span>
+      </div>
+      <div class="col__subheader">Licensing & Rights — Bounding Parameters</div>
+
+      <!-- RIGHT TO USE -->
+      <div class="manifest-block">
+        <div class="manifest-block__header">[SECTION_01] RIGHT TO USE</div>
+        <pre class="manifest-code"><code>LICENSE_TYPE:    Creative Commons
+LICENSE_ID:      CC BY-SA 4.0
+SCOPE:           International
+EFFECTIVE:       On Publication
+
+GRANT:
+  - You retain full copyright
+    ownership of your work.
+  - TBP receives a non-exclusive,
+    irrevocable license to publish,
+    distribute, and display the
+    submitted work.
+  - Readers may share and adapt
+    under identical terms with
+    proper attribution.
+
+RESTRICTIONS:
+  - No commercial sublicensing
+    without author consent.
+  - Derivative works must carry
+    the same license terms.
+  - Attribution must reference
+    original author and TBP.</code></pre>
+      </div>
+
+      <!-- ORIGINALITY PROVENANCE -->
+      <div class="manifest-block">
+        <div class="manifest-block__header">[SECTION_02] ORIGINALITY PROVENANCE</div>
+        <pre class="manifest-code"><code>PROVENANCE_CHECK: ENABLED
+VERIFICATION:     Automated + Editorial
+
+REQUIREMENTS:
+  - Submitted work MUST be original
+    and not under review elsewhere.
+  - All referenced works must be
+    properly cited using standard
+    academic or technical citation
+    formats.
+  - AI-assisted content must be
+    disclosed with tool identifiers
+    and extent of use.
+  - Plagiarism detection: automated
+    scan on receipt, editorial
+    review on flag.
+
+DISCLOSURE_FIELDS:
+  ai_tools_used:    [required if applicable]
+  data_sources:     [required]
+  prior_versions:   [optional]
+  related_works:    [optional]
+
+VIOLATION_POLICY:
+  - First offense: Submission
+    rejection + author notification.
+  - Repeat offense: Temporary
+    submission ban (90 days).
+  - Fabrication: Permanent ban +
+    public retraction notice.</code></pre>
+      </div>
+
+      <!-- DISTRIBUTION TERMS -->
+      <div class="manifest-block">
+        <div class="manifest-block__header">[SECTION_03] DISTRIBUTION TERMS</div>
+        <pre class="manifest-code"><code>DISTRIBUTION_MODEL: Open Access
+EMBARGO_PERIOD:     None
+INDEXING:           Public
+
+CHANNELS:
+  - Primary:  thebuilderprotocol.me
+  - Mirrors:  RSS, API, Archive
+  - Social:   Author-permissioned
+              sharing via canonical URL
+
+RETENTION:
+  - Published works are retained
+    indefinitely in the TBP archive.
+  - Authors may request takedown
+    with 30-day editorial review.
+  - Cached/indexed copies on third
+    party services are beyond TBP
+    control post-distribution.
+
+FORMAT_PRESERVATION:
+  - Original markdown source is
+    preserved alongside rendered
+    publication output.
+  - Metadata and revision history
+    maintained in submission log.</code></pre>
+      </div>
+
+      <!-- DATA HANDLING -->
+      <div class="manifest-block">
+        <div class="manifest-block__header">[SECTION_04] DATA HANDLING</div>
+        <pre class="manifest-code"><code>DATA_POLICY:   GDPR-Compliant
+STORAGE:       Encrypted at rest
+RETENTION:     Duration of publication
+
+PERSONAL_DATA:
+  collected:
+    - Author name
+    - Email address
+    - Affiliation
+    - ORCID (optional)
+    - IP address (session only)
+  purpose:
+    - Editorial communication
+    - Publication attribution
+    - Submission tracking
+  sharing:
+    - Never sold to third parties
+    - Shared with reviewers under
+      NDA during editorial process
+  deletion:
+    - On request, personal data
+      removed within 30 days
+    - Published content attributed
+      to "[Redacted Author]"</code></pre>
+      </div>
+
+      <!-- REVISION POLICY -->
+      <div class="manifest-block">
+        <div class="manifest-block__header">[SECTION_05] REVISION & APPEALS</div>
+        <pre class="manifest-code"><code>REVISION_WINDOW:  14 days post-submit
+APPEALS_PROCESS:  Available
+
+POST_SUBMISSION:
+  - Minor edits (typos, formatting)
+    permitted within revision window.
+  - Substantive changes require
+    editorial re-review.
+  - Version history maintained for
+    all revisions.
+
+REJECTION_APPEAL:
+  - Authors may appeal within
+    30 days of rejection notice.
+  - Appeals reviewed by independent
+    editorial committee.
+  - Decision on appeal is final.
+
+CONTACT:
+  editorial:  editorial@tbp.me
+  rights:     rights@tbp.me
+  appeals:    appeals@tbp.me</code></pre>
+      </div>
+
+      <div class="col__footer">
+        <span class="col__footer-line">─────────────────────────</span>
+        <div class="col__footer-meta">
+          <span>MANIFEST_VERSION: 2.1</span>
+          <span>LAST_UPDATED: 2026.11</span>
+          <span>JURISDICTION: International</span>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SYSTEM FOOTER BAR
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="sys-footer">
+    <span>THE BUILDER PROTOCOL</span>
+    <span class="sys-footer__sep">│</span>
+    <span>SUBMISSION MATRIX v2.1.0</span>
+    <span class="sys-footer__sep">│</span>
+    <span>ALL RIGHTS RESERVED © 2026</span>
+    <span class="sys-footer__sep">│</span>
+    <span id="footerWordCount">WORDS: 0</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
